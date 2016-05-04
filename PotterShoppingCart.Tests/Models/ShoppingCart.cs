@@ -17,9 +17,13 @@ namespace PotterShoppingCart.Tests.Models
         {
             var discountableBooks = _Books.GroupBy(x => x.Version).Select(y => y.First()).ToList();
             var priceOfDiscountableBooks = Convert.ToInt16(discountableBooks.Sum(x => x.Price) * (1 - Discount(discountableBooks)));
-            var nonDiscountableBooks = _Books.GroupBy(x => x.Version).Where(y => y.Count() > 1).ToList();
+
+            var secondDiscountableBooks = _Books.GroupBy(x => x.Version).Where(g=>g.Count()==2).Select(y => y.First()).ToList();
+            var priceOfsecondDiscountableBooks = Convert.ToInt16(secondDiscountableBooks.Sum(x => x.Price) * (1 - Discount(secondDiscountableBooks)));
+
+            var nonDiscountableBooks = _Books.GroupBy(x => x.Version).Where(y => y.Count() > 2).ToList();
             var priceOfNonDiscountalbeBooks = nonDiscountableBooks.Count * 100;
-            return priceOfDiscountableBooks + priceOfNonDiscountalbeBooks;
+            return priceOfDiscountableBooks + priceOfNonDiscountalbeBooks + priceOfsecondDiscountableBooks;
         }
 
         private double Discount(IEnumerable<Potter> distinctBooks)
