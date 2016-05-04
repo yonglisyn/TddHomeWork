@@ -26,7 +26,16 @@ namespace PotterShoppingCart.Tests
             var expected = 190;
             var actualPrice = shopCart.GetPrice();
             Assert.AreEqual(expected,actualPrice);
+        }
 
+        [TestMethod]
+        public void Test_CalculatePrice_Buy_1_Book1_1_Book2_1_Book3_Should_Be_270()
+        {
+            var books = new List<Potter>{new Potter(1),new Potter(2),new Potter(3)};
+            var shopCart = new ShoppingCart(books);
+            var expected = 270;
+            var actualPrice = shopCart.GetPrice();
+            Assert.AreEqual(expected, actualPrice);
         }
     }
 }
