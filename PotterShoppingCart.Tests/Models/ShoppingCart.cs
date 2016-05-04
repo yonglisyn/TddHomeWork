@@ -1,16 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PotterShoppingCart.Tests.Models
 {
     public class ShoppingCart
     {
-        private Potter _Book;
         private List<Potter> _Books;
-
-        public ShoppingCart(Potter book)
-        {
-            _Book = book;
-        }
 
         public ShoppingCart(List<Potter> books)
         {
@@ -19,9 +14,9 @@ namespace PotterShoppingCart.Tests.Models
 
         public int GetPrice()
         {
-            if (_Book != null)
+            if (_Books.Count == 1)
             {
-                return _Book.Price;
+                return _Books.First().Price;
             }
             if (_Books.Count == 2)
             {
