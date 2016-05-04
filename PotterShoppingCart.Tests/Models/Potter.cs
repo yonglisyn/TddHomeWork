@@ -9,6 +9,7 @@
             _Version = version;
         }
 
+        public int Version { get { return _Version; }}
         public int Price { get { return _Price; }}
     }
 }

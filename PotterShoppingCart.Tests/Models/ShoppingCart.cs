@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace PotterShoppingCart.Tests.Models
 {
@@ -15,12 +16,16 @@ namespace PotterShoppingCart.Tests.Models
 
         public int GetPrice()
         {
-            return Convert.ToInt16(_Books.Sum(x=>x.Price)* (1 - Discount()));
+            var distinctBooks = _Books.GroupBy(x => x.Version).Select(y => y.First()).ToList();
+            var distinctPrice = Convert.ToInt16(distinctBooks.Sum(x => x.Price) * (1 - Discount(distinctBooks)));
+            var duplicatedBooks = _Books.GroupBy(x => x.Version).Where(y => y.Count() > 1).ToList();
+            var duplicatedPrice = duplicatedBooks.Count * 100;
+            return distinctPrice + duplicatedPrice;
         }
 
-        private double Discount()
+        private double Discount(IEnumerable<Potter> distinctBooks)
         {
-            switch (_Books.Count)
+            switch (distinctBooks.Select(x => x.Version).Distinct().Count())
             {
                 case 2:
                     return 0.05;
