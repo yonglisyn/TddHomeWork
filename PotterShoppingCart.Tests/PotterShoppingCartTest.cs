@@ -26,6 +26,7 @@ namespace PotterShoppingCart.Tests
             var expected = 190;
             var actualPrice = shopCart.GetPrice();
             Assert.AreEqual(expected,actualPrice);
+
         }
     }
 }
