@@ -24,6 +24,8 @@ namespace PotterShoppingCart.Tests.Models
                 return 0.05;
             if (_Books.Count == 3)
                 return 0.1;
+            if (_Books.Count == 4)
+                return 0.2;
             return 0;
         }
     }
