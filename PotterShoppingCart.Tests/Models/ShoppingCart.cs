@@ -23,6 +23,11 @@ namespace PotterShoppingCart.Tests.Models
             {
                 return Convert.ToInt16( _Books.Sum(x => x.Price)*0.95);
             }
+            if (_Books.Count == 3)
+            {
+                return Convert.ToInt16(_Books.Sum(x => x.Price) * 0.9);
+                
+            }
             return 0;
         }
     }
