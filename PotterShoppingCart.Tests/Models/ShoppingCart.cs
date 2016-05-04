@@ -15,15 +15,27 @@ namespace PotterShoppingCart.Tests.Models
 
         public int GetPrice()
         {
-            var discountableBooks = _Books.GroupBy(x => x.Version).Select(y => y.First()).ToList();
-            var priceOfDiscountableBooks = Convert.ToInt16(discountableBooks.Sum(x => x.Price) * (1 - Discount(discountableBooks)));
+            var priceOfDiscountableBooks = GetPriceOfDiscountableBooks();
+            var priceOfNonDiscountalbeBooks = GetPriceOfNonDiscountalbeBooks();
+            return priceOfDiscountableBooks + priceOfNonDiscountalbeBooks;
+        }
 
-            var secondDiscountableBooks = _Books.GroupBy(x => x.Version).Where(g=>g.Count()==2).Select(y => y.First()).ToList();
-            var priceOfsecondDiscountableBooks = Convert.ToInt16(secondDiscountableBooks.Sum(x => x.Price) * (1 - Discount(secondDiscountableBooks)));
-
+        private int GetPriceOfNonDiscountalbeBooks()
+        {
             var nonDiscountableBooks = _Books.GroupBy(x => x.Version).Where(y => y.Count() > 2).ToList();
-            var priceOfNonDiscountalbeBooks = nonDiscountableBooks.Count * 100;
-            return priceOfDiscountableBooks + priceOfNonDiscountalbeBooks + priceOfsecondDiscountableBooks;
+            var priceOfNonDiscountalbeBooks = nonDiscountableBooks.Count*100;
+            return priceOfNonDiscountalbeBooks;
+        }
+
+        private int GetPriceOfDiscountableBooks()
+        {
+            var discountableBooks = _Books.GroupBy(x => x.Version).Select(y => y.First()).ToList();
+            var priceOfDiscountableBooks = Convert.ToInt16(discountableBooks.Sum(x => x.Price)*(1 - Discount(discountableBooks)));
+            var secondDiscountableBooks =
+                _Books.GroupBy(x => x.Version).Where(g => g.Count() == 2).Select(y => y.First()).ToList();
+            var priceOfsecondDiscountableBooks =
+                Convert.ToInt16(secondDiscountableBooks.Sum(x => x.Price)*(1 - Discount(secondDiscountableBooks)));
+            return priceOfDiscountableBooks + priceOfsecondDiscountableBooks;
         }
 
         private double Discount(IEnumerable<Potter> distinctBooks)
