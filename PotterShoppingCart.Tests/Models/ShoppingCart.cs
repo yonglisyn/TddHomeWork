@@ -20,15 +20,19 @@ namespace PotterShoppingCart.Tests.Models
 
         private double Discount()
         {
-            if (_Books.Count == 2)
-                return 0.05;
-            if (_Books.Count == 3)
-                return 0.1;
-            if (_Books.Count == 4)
-                return 0.2;
-            if (_Books.Count == 5)
-                return 0.25;
-            return 0;
+            switch (_Books.Count)
+            {
+                case 2:
+                    return 0.05;
+                case 3:
+                    return 0.1;
+                case 4:
+                    return 0.2;
+                case 5:
+                    return 0.25;
+                default:
+                    return 0;
+            }
         }
     }
 }
