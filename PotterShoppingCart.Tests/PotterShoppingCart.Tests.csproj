@@ -53,6 +53,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Models\Potter.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="PotterShoppingCartTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PotterShoppingCart.Tests.Models;
 
 namespace PotterShoppingCart.Tests
 {
@@ -19,32 +16,5 @@ namespace PotterShoppingCart.Tests
             var actualPrice = shopCart.GetPrice();
             Assert.AreEqual(expected,actualPrice);
         }
-    }
-
-    public class ShoppingCart
-    {
-        private Potter _Book;
-
-        public ShoppingCart(Potter book)
-        {
-            _Book = book;
-        }
-
-        public int GetPrice()
-        {
-            return _Book.Price;
-        }
-    }
-
-    public class Potter
-    {
-        private int _Version;
-        private const int _Price = 100;
-        public Potter(int version)
-        {
-            _Version = version;
-        }
-
-        public int Price { get { return _Price; }}
     }
 }
