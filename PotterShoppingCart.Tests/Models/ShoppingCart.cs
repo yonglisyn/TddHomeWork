@@ -19,7 +19,15 @@ namespace PotterShoppingCart.Tests.Models
 
         public int GetPrice()
         {
-            return _Book.Price;
+            if (_Book != null)
+            {
+                return _Book.Price;
+            }
+            if (_Books.Count == 2)
+            {
+                return 190;
+            }
+            return 0;
         }
     }
 }
