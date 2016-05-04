@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace PotterShoppingCart.Tests.Models
 {
@@ -25,7 +24,7 @@ namespace PotterShoppingCart.Tests.Models
 
         private double Discount(IEnumerable<Potter> distinctBooks)
         {
-            switch (distinctBooks.Select(x => x.Version).Distinct().Count())
+            switch (distinctBooks.Select(x => x.Version).Count())
             {
                 case 2:
                     return 0.05;
