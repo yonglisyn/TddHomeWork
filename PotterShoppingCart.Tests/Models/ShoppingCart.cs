@@ -16,10 +16,10 @@ namespace PotterShoppingCart.Tests.Models
 
         public int GetPrice()
         {
-            var distinctBooks = _Books.GroupBy(x => x.Version).Select(y => y.First()).ToList();
-            var distinctPrice = Convert.ToInt16(distinctBooks.Sum(x => x.Price) * (1 - Discount(distinctBooks)));
-            var duplicatedBooks = _Books.GroupBy(x => x.Version).Where(y => y.Count() > 1).ToList();
-            var duplicatedPrice = duplicatedBooks.Count * 100;
+            var discountableBooks = _Books.GroupBy(x => x.Version).Select(y => y.First()).ToList();
+            var distinctPrice = Convert.ToInt16(discountableBooks.Sum(x => x.Price) * (1 - Discount(discountableBooks)));
+            var nonDiscountableBooks = _Books.GroupBy(x => x.Version).Where(y => y.Count() > 1).ToList();
+            var duplicatedPrice = nonDiscountableBooks.Count * 100;
             return distinctPrice + duplicatedPrice;
         }
 
