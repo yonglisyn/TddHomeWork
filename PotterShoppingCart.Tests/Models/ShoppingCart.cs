@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PotterShoppingCart.Tests.Models
@@ -20,7 +21,7 @@ namespace PotterShoppingCart.Tests.Models
             }
             if (_Books.Count == 2)
             {
-                return 190;
+                return Convert.ToInt16( _Books.Sum(x => x.Price)*0.95);
             }
             return 0;
         }
