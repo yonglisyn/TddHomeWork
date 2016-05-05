@@ -17,9 +17,10 @@ namespace PotterShoppingCart.Tests.Models
         {
             var booksGroups = _Books.GroupBy(x => x.Version);
             var maxGroupCount = booksGroups.Max(x => x.Count());
+            var countList = booksGroups.Select(x => x.Count()).ToList();
             var groupCount = 0;
             var price = 0;
-            while (groupCount < maxGroupCount)
+            while (groupCount < maxGroupCount && countList.Contains(groupCount+1))
             {
                 var myBooks = GetDistinctBooksForCountOfSameVersion(groupCount);
                 price += Convert.ToInt16(myBooks.Sum(x => x.Price) * (1 - Discount(myBooks)));
