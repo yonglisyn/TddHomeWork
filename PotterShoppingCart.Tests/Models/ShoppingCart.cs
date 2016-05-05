@@ -15,7 +15,7 @@ namespace PotterShoppingCart.Tests.Models
 
         public int GetPrice()
         {
-            var booksGroups = _Books.GroupBy(x => x.Version);
+            var booksGroups = _Books.GroupBy(x => x.Version).ToList();
             var maxGroupCount = booksGroups.Max(x => x.Count());
             var countList = booksGroups.Select(x => x.Count()).ToList();
             var groupCount = 0;
